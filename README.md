@@ -20,6 +20,7 @@ chmod +x script.sh
 
 ```
 
+<!--
 ## [2. ]() 
 ```
 PROJECT_ID=$(gcloud projects list | grep qwiklabs-gcp | awk '{print $2}' | tail -1 )
@@ -28,12 +29,14 @@ curl -o script.sh
 chmod +x script.sh
 ./script.sh
 
-```
-## [3. ]() 
+```    -->
+
+
+## [3. Deploying a Python Flask Web Application to App Engine Flexible](https://github.com/user9-21/DevOps-A-beautiful-relationship/blob/main/1.3_Deploying-a-Python-Flask-Web-Application-to-App-Engine-Flexible.sh) 
 ```
 PROJECT_ID=$(gcloud projects list | grep qwiklabs-gcp | awk '{print $2}' | tail -1 )
 gcloud config set project $PROJECT_ID
-curl -o script.sh 
+curl -o script.sh https://raw.githubusercontent.com/user9-21/DevOps-A-beautiful-relationship/main/1.3_Deploying-a-Python-Flask-Web-Application-to-App-Engine-Flexible.sh
 chmod +x script.sh
 ./script.sh
 
