@@ -49,7 +49,7 @@ mkdir python-docs-samples/codelabs/flex_and_vision/templates
 cd python-docs-samples/codelabs/flex_and_vision/templates
 curl -o homepage.html https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/main/codelabs/flex_and_vision/templates/homepage.html
 ls
-cd python-docs-samples/codelabs/flex_and_vision
+cd ..
 curl -o main_test.py https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/main/codelabs/flex_and_vision/main_test.py
 curl -o main.py https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/main/codelabs/flex_and_vision/main.py
 curl -o requirements.txt https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/main/codelabs/flex_and_vision/requirements.txt
