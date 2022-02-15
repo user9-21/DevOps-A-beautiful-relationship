@@ -80,8 +80,92 @@ Task 2 Completed
 ${RESET}"
 
 echo $MODEL_BUCKET
-  
- 
+sed -i "s/YOUR_BUCKET/$MODEL_BUCKET/g" tf-serving/configmap-resnet50.yaml 
+cat tf-serving/configmap-resnet50.yaml 
+kubectl apply -f tf-serving/configmap-resnet50.yaml
+echo "${GREEN}${BOLD}
+
+Task 3 Completed
+
+${RESET}"
+cat tf-serving/deployment-resnet50.yaml
+kubectl apply -f tf-serving/deployment-resnet50.yaml
+kubectl get deployments | grep 'image-classifier-resnet50' |  awk '{print $4}' 
+DEPLOYMENT_STATE=$(kubectl get deployments | grep image-classifier-resnet50 |  awk '{print $4}')
+echo $DEPLOYMENT_STATE
+while [ $DEPLOYMENT_STATE != 1 ];
+do DEPLOYMENT_STATE=$(kubectl get deployments | grep image-classifier-resnet50 |  awk '{print $4}') && echo $DEPLOYMENT_STATE;
+done
+kubectl apply -f tf-serving/service.yaml
+echo "${GREEN}${BOLD}
+
+Task 4 Completed
+
+${RESET}"
+
+kubectl apply -f tf-serving/gateway.yaml
+kubectl apply -f tf-serving/virtualservice.yaml
+echo "${GREEN}${BOLD}
+
+Task 5 Completed
+
+${RESET}"
+
+export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+echo $GATEWAY_URL
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+kubectl apply -f tf-serving/destinationrule.yaml
+kubectl apply -f tf-serving/virtualservice-weight-100.yaml
+sed -i "s/YOUR_BUCKET/$MODEL_BUCKET/g" tf-serving/configmap-resnet101.yaml
+cat tf-serving/configmap-resnet101.yaml 
+kubectl apply -f tf-serving/configmap-resnet101.yaml
+cat tf-serving/deployment-resnet101.yaml
+kubectl apply -f tf-serving/deployment-resnet101.yaml
+DEPLOYMENT_STATE2=$(kubectl get deployments | grep image-classifier-resnet101 |  awk '{print $4}')
+echo $DEPLOYMENT_STATE2
+while [ $DEPLOYMENT_STATE2 != 1 ];
+do DEPLOYMENT_STATE2=$(kubectl get deployments | grep image-classifier-resnet101 |  awk '{print $4}') && echo $DEPLOYMENT_STATE2 ;
+done
+echo "${GREEN}${BOLD}
+
+Task 6 Completed
+
+${RESET}"
+
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+kubectl apply -f tf-serving/virtualservice-weight-70.yaml
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+
+echo "${GREEN}${BOLD}
+
+Task 7 Completed
+
+${RESET}"
+
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+
+
+kubectl apply -f tf-serving/virtualservice-focused-routing.yaml
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+echo "${GREEN}${BOLD}
+
+Task 8 Completed.
+
+Game completed.
+
+${RESET}"
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+curl -d @payloads/request-body.json -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+
+curl -d @payloads/request-body.json -H "user-group: canary" -X POST http://$GATEWAY_URL/v1/models/image_classifier:predict
+
+
 
 #-----------------------------------------------------end----------------------------------------------------------#
 read -p "${BOLD}${YELLOW}Remove files? [y/n] : ${RESET}" CONSENT_REMOVE
