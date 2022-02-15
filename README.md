@@ -20,6 +20,17 @@ chmod +x script.sh
 
 ```
 
+## <div align="center">OR</div>
+
+```
+PROJECT_ID=$(gcloud projects list | grep qwiklabs-gcp | awk '{print $2}' | tail -1 )
+gcloud config set project $PROJECT_ID
+gcloud source repos create REPO_DEMO
+
+```
+
+
+
 <!--
 ## [2. ]() 
 ```
@@ -30,6 +41,12 @@ chmod +x script.sh
 ./script.sh
 
 ```    -->
+
+
+## [2. GKE Autopilot: Qwik Start]() 
+```
+DO it Manually
+``` 
 
 
 ## [3. Deploying a Python Flask Web Application to App Engine Flexible](https://github.com/user9-21/DevOps-A-beautiful-relationship/blob/main/1.3_Deploying-a-Python-Flask-Web-Application-to-App-Engine-Flexible.sh) 
