@@ -53,8 +53,8 @@ cd ..
 curl -o main_test.py https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/main/codelabs/flex_and_vision/main_test.py
 curl -o main.py https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/main/codelabs/flex_and_vision/main.py
 curl -o requirements.txt https://raw.githubusercontent.com/GoogleCloudPlatform/python-docs-samples/main/codelabs/flex_and_vision/requirements.txt
-cat > app.yaml << EOF
-runtime: python
+
+echo 'runtime: python
 env: flex
 entrypoint: gunicorn -b :$PORT main:app
 
@@ -62,11 +62,11 @@ runtime_config:
   python_version: 3
 
 env_variables:
-  CLOUD_STORAGE_BUCKET: $PROJECT_ID
+  CLOUD_STORAGE_BUCKET: PROJECT_ID
 manual_scaling:
-  instances: 1
-EOF
+  instances: 1' > app.yaml
 
+sed -i "s/PROJECT_ID/$PROJECT_ID/g" app.yaml
 ls
 
 gcloud iam service-accounts create qwiklab \
@@ -98,13 +98,32 @@ echo "${GREEN}${BOLD}
 Task 2 Completed
 
 ${RESET}"
+echo "${YELLOW}${BOLD}
+ click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080${YELLOW}
+ 
+ Click the Choose File button, 
+ find an image from your computer that has a human face, 
+ and then click Submit.
+ 
+ 
+ After uploading a photo, press ${CYAN}Ctrl+C${YELLOW} Carefully only once on the Cloud Shell command line to shut down the local web server.
+
+
+${RESET}"
+
 python main.py
+echo "${GREEN}${BOLD}
+
+Task 3 Completed
+
+${RESET}"
 gcloud config set app/cloud_build_timeout 1000
+cat app.yaml
 gcloud app deploy --quiet
 
 echo "${GREEN}${BOLD}
 
-Task 3 Completed.
+Task 4 Completed.
 
 Game Completed
 
