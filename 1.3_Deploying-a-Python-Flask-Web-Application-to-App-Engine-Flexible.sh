@@ -99,7 +99,7 @@ Task 2 Completed
 
 ${RESET}"
 echo "${YELLOW}${BOLD}
- click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080${YELLOW}
+ click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080(https://shell.cloud.google.com/devshell/proxy?authuser=0&port=8080&environment_id=default) ${YELLOW}
  
  Click the Choose File button, 
  find an image from your computer that has a human face, 
