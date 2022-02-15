@@ -98,6 +98,7 @@ echo "${GREEN}${BOLD}
 Task 2 Completed
 
 ${RESET}"
+
 cat > 2.sh << EOF
 echo "${YELLOW}${BOLD}
  click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080 -> https://shell.cloud.google.com/devshell/proxy?authuser=0&port=8080&environment_id=default ${YELLOW}
@@ -112,6 +113,10 @@ echo "${YELLOW}${BOLD}
 
 ${RESET}"
 
+export PROJECT_ID=$(gcloud info --format='value(config.project)')
+virtualenv -p python3 env
+source env/bin/activate
+export CLOUD_STORAGE_BUCKET=${PROJECT_ID}
 python main.py
 echo "${GREEN}${BOLD}
 
