@@ -98,8 +98,9 @@ echo "${GREEN}${BOLD}
 Task 2 Completed
 
 ${RESET}"
+cat > 2.sh << EOF
 echo "${YELLOW}${BOLD}
- click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080(https://shell.cloud.google.com/devshell/proxy?authuser=0&port=8080&environment_id=default) ${YELLOW}
+ click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080 -> https://shell.cloud.google.com/devshell/proxy?authuser=0&port=8080&environment_id=default ${YELLOW}
  
  Click the Choose File button, 
  find an image from your computer that has a human face, 
@@ -115,6 +116,16 @@ python main.py
 echo "${GREEN}${BOLD}
 
 Task 3 Completed
+
+${RESET}"
+EOF
+
+chmod +x 2.sh
+echo "${YELLOW}${BOLD}
+
+Run this in another(+) terminal:
+${BG_RED}
+./2.sh
 
 ${RESET}"
 gcloud config set app/cloud_build_timeout 1000
