@@ -42,34 +42,6 @@ export ZONE=us-central1-a
 #git clone https://github.com/GoogleCloudPlatform/python-docs-samples.git
 #cd python-docs-samples/codelabs/flex_and_vision
 
-cat > 2.sh << EOF
-echo "${YELLOW}${BOLD}
- click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080 -> https://shell.cloud.google.com/devshell/proxy?authuser=0&port=8080&environment_id=default ${YELLOW}
- 
- Click the Choose File button, 
- find an image from your computer that has a human face, 
- and then click Submit.
- 
- 
- After uploading a photo, press ${CYAN}Ctrl+C${YELLOW} Carefully only once on the Cloud Shell command line to shut down the local web server.
-
-
-${RESET}"
-
-export PROJECT_ID=$(gcloud info --format='value(config.project)')
-cd python-docs-samples/codelabs/flex_and_vision
-virtualenv -p python3 env
-source env/bin/activate
-export CLOUD_STORAGE_BUCKET=${PROJECT_ID}
-python main.py
-echo "${GREEN}${BOLD}
-
-Task 3 Completed
-
-${RESET}"
-EOF
-
-chmod +x 2.sh
 
 
 mkdir python-docs-samples
@@ -129,14 +101,27 @@ Task 2 Completed
 
 ${RESET}"
 
-
 echo "${YELLOW}${BOLD}
+ click on the Web Preview icon in the Cloud Shell toolbar and choose ${CYAN}Preview on port 8080 -> https://shell.cloud.google.com/devshell/proxy?authuser=0&port=8080&environment_id=default ${YELLOW}
+ 
+ Click the Choose File button, 
+ find an image from your computer that has a human face, 
+ and then click Submit.
+ 
+ 
+ After uploading a photo, press ${CYAN}Ctrl+C${YELLOW} Carefully only once on the Cloud Shell command line to shut down the local web server.
 
-Run this in another(+) terminal:
-${BG_RED}
-./2.sh
 
 ${RESET}"
+
+python main.py
+echo "${GREEN}${BOLD}
+
+Task 3 Completed
+
+${RESET}"
+
+
 gcloud config set app/cloud_build_timeout 1000
 cat app.yaml
 gcloud app deploy --quiet
